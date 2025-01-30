@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,8 +23,14 @@ public class InvestmentController {
 
     @GetMapping("/investments")
     public ResponseEntity<List<InvestmentEntity>> getInvestment(){
-        //    System.out.println(investmentRepository.findAll());
-      return ResponseEntity.ok((investmentRepository.findAll()));
+        List<InvestmentEntity> investments = new ArrayList<InvestmentEntity>();
+        Date date = new Date(2025,1,30);
+
+        InvestmentEntity investment = new InvestmentEntity(1,"Indiana University Kokomo","New","2300 S Washington St", 3500, 10000, date, date,6);
+        for(int i = 0; i < 9; i++){
+            investments.add(investment);
+        }
+      return ResponseEntity.ok((investments));
     }
 
     @GetMapping("/investments/{id}")

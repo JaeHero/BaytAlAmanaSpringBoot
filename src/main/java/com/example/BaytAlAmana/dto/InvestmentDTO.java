@@ -1,6 +1,7 @@
 package com.example.BaytAlAmana.dto;
 
 import com.example.BaytAlAmana.entity.InvestmentUpdateEntity;
+import com.example.BaytAlAmana.entity.UserEntity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class InvestmentDTO {
 
-    private int id;
+    private long id;
 
     private String name;
 
@@ -36,4 +37,6 @@ public class InvestmentDTO {
     private int investorCount;
 
     private List<InvestmentUpdateEntity> updates;
+
+    private List<UserEntity> users;
 }

@@ -6,9 +6,10 @@ import com.example.BaytAlAmana.mapper.MessageMapper;
 import com.example.BaytAlAmana.repo.MessageRepository;
 import com.example.BaytAlAmana.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MessageServiceImpl implements MessageService {
 
     @Autowired

@@ -6,9 +6,10 @@ import com.example.BaytAlAmana.mapper.InvestmentUpdateMapper;
 import com.example.BaytAlAmana.repo.InvestmentUpdateRepository;
 import com.example.BaytAlAmana.service.InvestmentUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class InvestmentUpdateServiceImpl implements InvestmentUpdateService {
 
     @Autowired

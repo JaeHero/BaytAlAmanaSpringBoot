@@ -1,9 +1,9 @@
 package com.example.BaytAlAmana.service;
 
 import com.example.BaytAlAmana.dto.InvestmentDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 public interface InvestmentService {
     List<InvestmentDTO> getAllInvestments();
     InvestmentDTO getInvestmentById(int id);

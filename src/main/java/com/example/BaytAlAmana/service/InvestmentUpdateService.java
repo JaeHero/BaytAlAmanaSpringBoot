@@ -1,6 +1,7 @@
 package com.example.BaytAlAmana.service;
 
 import com.example.BaytAlAmana.dto.InvestmentUpdateDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

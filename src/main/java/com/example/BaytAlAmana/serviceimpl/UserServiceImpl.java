@@ -5,11 +5,13 @@ import com.example.BaytAlAmana.entity.UserEntity;
 import com.example.BaytAlAmana.mapper.UserMapper;
 import com.example.BaytAlAmana.repo.UserRepository;
 import com.example.BaytAlAmana.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class UserServiceImpl implements UserService {
-
+    @Autowired
     UserRepository userRepository;
 
     @Override

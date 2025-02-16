@@ -1,55 +1,59 @@
 package com.example.BaytAlAmana.entity;
 
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "investment")
 @Data
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class InvestmentEntity {
     @Id
-    @Column(name = "INVESTMENT_ID")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "STATUS")
+    @Column(name = "status")
     private String status;
 
-    @Column(name = "LOCATION")
+    @Column(name = "location")
     private String location;
 
-    @Column(name = "FUNDING")
-    private int funding;
+    @Column(name = "funding")
+    @Nullable
+    private Integer funding;
 
-    @Column(name = "FUNDING_GOAL")
+    @Column(name = "funding_goal")
     private int fundingGoal;
 
-    @Column(name = "DATE")
+    @Column(name = "date")
     private Date date;
 
-    @Column(name = "EXPECTED_CLOSE_DATE")
+    @Column(name = "expected_close_date")
     private Date expectedCloseDate;
 
-    @Column(name = "INVESTOR_COUNT")
+    @Column(name = "investor_count")
     @Nullable
-    private int investorCount;
+    private Integer investorCount;
 
-    private List<InvestmentUpdateEntity> updates;
+    @OneToMany(mappedBy = "investmentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InvestmentUpdateEntity> updates = new ArrayList<>();
 
-
+    @ManyToMany
+    @JoinTable(
+            name = "investment_users", // Join table for users and investments
+            joinColumns = @JoinColumn(name = "investment_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<UserEntity> users;
 }

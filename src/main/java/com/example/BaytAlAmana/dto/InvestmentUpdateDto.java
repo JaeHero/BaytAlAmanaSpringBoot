@@ -1,5 +1,6 @@
 package com.example.BaytAlAmana.dto;
 
+import com.example.BaytAlAmana.entity.InvestmentEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,10 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvestmentUpdateDto {
-    private int updateId;
+    private long id;
+    private InvestmentEntity investmentEntity;
+
     private Date date;
     private int cost;
-    private String update;
+    private String description;
 }

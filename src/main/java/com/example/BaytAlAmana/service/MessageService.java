@@ -1,9 +1,9 @@
 package com.example.BaytAlAmana.service;
 
 import com.example.BaytAlAmana.dto.MessageDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 public interface MessageService {
     List<MessageDto> getAllMessages();
     MessageDto getMessageById(int id);

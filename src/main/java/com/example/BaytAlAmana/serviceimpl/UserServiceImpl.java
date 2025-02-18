@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(int id, UserDto userDto) {
         UserEntity userEntity = userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found"));
         UserEntity userEntityToUpdate = UserMapper.INSTANCE.toUserEntity(userDto);
+        userEntityToUpdate.setId(id);
         return UserMapper.INSTANCE.toUserDto(userRepository.save(userEntityToUpdate));
     }
 

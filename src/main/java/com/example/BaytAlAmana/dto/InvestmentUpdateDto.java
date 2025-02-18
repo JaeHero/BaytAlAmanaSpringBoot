@@ -12,9 +12,8 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvestmentUpdateDto {
-    private long id;
-    private InvestmentEntity investmentEntity;
-
+    private int id;
+    private int investmentId;
     private Date date;
     private int cost;
     private String description;

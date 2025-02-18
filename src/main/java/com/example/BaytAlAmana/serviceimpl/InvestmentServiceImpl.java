@@ -35,6 +35,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     public InvestmentDTO updateInvestment(int id, InvestmentDTO investmentDTO) {
         InvestmentEntity investmentEntity = investmentRepository.findById(id).orElseThrow(()->new RuntimeException("Investment not found"));
         InvestmentEntity investmentEntityToUpdate = InvestmentMapper.INSTANCE.toInvestmentEntity(investmentDTO);
+        investmentEntityToUpdate.setId(id);
         return InvestmentMapper.INSTANCE.toInvestmentDTO(investmentRepository.save(investmentEntityToUpdate));
     }
 

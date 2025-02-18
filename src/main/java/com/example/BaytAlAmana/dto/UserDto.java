@@ -2,6 +2,7 @@ package com.example.BaytAlAmana.dto;
 
 import com.example.BaytAlAmana.entity.InvestmentEntity;
 import com.example.BaytAlAmana.entity.MessageEntity;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

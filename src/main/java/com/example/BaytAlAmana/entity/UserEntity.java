@@ -15,7 +15,7 @@ import java.util.List;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in MessageEntity
     private List<MessageEntity> messages;

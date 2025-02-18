@@ -1,5 +1,6 @@
 package com.example.BaytAlAmana.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.List;
 public class InvestmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -47,6 +48,7 @@ public class InvestmentEntity {
     private Integer investorCount;
 
     @OneToMany(mappedBy = "investmentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Indicates this is the "parent" side for serialization
     private List<InvestmentUpdateEntity> updates = new ArrayList<>();
 
     @ManyToMany

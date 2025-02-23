@@ -49,8 +49,6 @@ public class InvestmentController {
         return ResponseEntity.ok().body(investmentService.deleteInvestment(id));
     }
 
-
-
     }
 
 

@@ -1,10 +1,12 @@
 package com.example.BaytAlAmana.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,8 +19,12 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in MessageEntity
-    private List<MessageEntity> messages;
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<MessageEntity> messages = new ArrayList<>();
+
+//    @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in MessageEntity
+//    private List<MessageEntity> messages;
 
     @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in InvestmentEntity
     private List<InvestmentEntity> investments;

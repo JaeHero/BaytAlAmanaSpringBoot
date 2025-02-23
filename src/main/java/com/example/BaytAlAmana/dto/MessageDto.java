@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MessageDto {
     private int id;
-    private List<UserEntity> users;
+    private int userId;
     private String message;
     private Date date;
 }

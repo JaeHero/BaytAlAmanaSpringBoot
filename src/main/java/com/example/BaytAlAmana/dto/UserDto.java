@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 @Setter
 public class UserDto {
+    //One to many
     private int id;
     private List<MessageEntity> messages;
     private String username;

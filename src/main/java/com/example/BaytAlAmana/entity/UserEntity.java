@@ -1,13 +1,15 @@
 package com.example.BaytAlAmana.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -25,9 +27,11 @@ public class UserEntity {
 
 //    @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in MessageEntity
 //    private List<MessageEntity> messages;
-
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonBackReference
     @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in InvestmentEntity
-    private List<InvestmentEntity> investments;
+    private Set<InvestmentEntity> investments = new HashSet<>();
 
     @Column(name = "username")
     private String username;

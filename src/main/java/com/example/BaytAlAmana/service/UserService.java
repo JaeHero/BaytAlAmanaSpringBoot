@@ -10,4 +10,5 @@ public interface UserService {
     UserDto createUser(UserDto userDto);
     UserDto updateUser(int id, UserDto userDto);
     boolean deleteUser(int id);
+    boolean assignUserToInvestment(int id, int investmentId);
 }

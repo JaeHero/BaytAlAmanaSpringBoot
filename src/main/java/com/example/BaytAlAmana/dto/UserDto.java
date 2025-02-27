@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,5 +29,5 @@ public class UserDto {
     private boolean isAdmin;
     private boolean isApproved;
     private boolean isPublic;
-    private List<InvestmentEntity> investments;
+  //  private Set<InvestmentEntity> investments;
 }

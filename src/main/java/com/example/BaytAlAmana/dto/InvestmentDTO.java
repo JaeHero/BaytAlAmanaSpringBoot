@@ -12,6 +12,8 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
+
 @Data
 @Setter
 @NoArgsConstructor
@@ -38,5 +40,5 @@ public class InvestmentDTO {
 
     private List<InvestmentUpdateEntity> updates;
 
-    private List<UserEntity> users;
+    private Set<UserEntity> users;
 }

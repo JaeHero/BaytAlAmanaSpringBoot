@@ -1,18 +1,25 @@
 package com.example.BaytAlAmana.serviceimpl;
 
 import com.example.BaytAlAmana.dto.UserDto;
+import com.example.BaytAlAmana.entity.InvestmentEntity;
 import com.example.BaytAlAmana.entity.UserEntity;
 import com.example.BaytAlAmana.mapper.UserMapper;
+import com.example.BaytAlAmana.repo.InvestmentRepository;
 import com.example.BaytAlAmana.repo.UserRepository;
 import com.example.BaytAlAmana.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    InvestmentRepository investmentRepository;
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -47,4 +54,25 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+
+    @Override
+    public boolean assignUserToInvestment(int id, int investmentId) {
+        UserEntity user = userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("User not found"));
+        InvestmentEntity investment = investmentRepository.findById(investmentId).orElseThrow(()-> new EntityNotFoundException("Investment not found"));
+        user.getInvestments().add(investment);
+        investment.getUsers().add(user);
+        user.setInvestmentCount(user.getInvestments().size());
+        try {
+            investmentRepository.save(investment);
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+        return true;
+
+
+    }
+
+
+
 }

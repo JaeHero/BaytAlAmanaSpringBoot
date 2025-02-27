@@ -1,15 +1,16 @@
 package com.example.BaytAlAmana.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "investment")
@@ -57,5 +58,8 @@ public class InvestmentEntity {
             joinColumns = @JoinColumn(name = "investment_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<UserEntity> users;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonManagedReference
+    private Set<UserEntity> users = new HashSet<>();
 }

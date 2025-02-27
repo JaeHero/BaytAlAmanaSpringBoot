@@ -35,4 +35,9 @@ public class UserController {
     public ResponseEntity<Boolean> deleteUser(@PathVariable int id){
         return ResponseEntity.ok().body(userService.deleteUser(id));
     }
+
+    @PutMapping("user/{id}/investment/{investmentId}")
+    public ResponseEntity<Boolean> assignUserToInvestment(@PathVariable int id, @PathVariable int investmentId){
+        return ResponseEntity.ok().body(userService.assignUserToInvestment(id, investmentId));
+    }
 }

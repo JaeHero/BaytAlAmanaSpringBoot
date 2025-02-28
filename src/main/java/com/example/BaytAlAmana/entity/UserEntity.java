@@ -1,8 +1,6 @@
 package com.example.BaytAlAmana.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +8,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @Entity
 @Table(name = "user")
 @Data
@@ -22,15 +23,14 @@ public class UserEntity {
     private int id;
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<MessageEntity> messages = new ArrayList<>();
 
 //    @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in MessageEntity
 //    private List<MessageEntity> messages;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JsonBackReference
     @ManyToMany(mappedBy = "users") // Relation mapped by the "users" list in InvestmentEntity
+    @JsonIgnore
     private Set<InvestmentEntity> investments = new HashSet<>();
 
     @Column(name = "username")

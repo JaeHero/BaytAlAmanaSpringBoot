@@ -29,5 +29,5 @@ public class UserDto {
     private boolean isAdmin;
     private boolean isApproved;
     private boolean isPublic;
-  //  private Set<InvestmentEntity> investments;
+   // private Set<InvestmentEntity> investments;
 }

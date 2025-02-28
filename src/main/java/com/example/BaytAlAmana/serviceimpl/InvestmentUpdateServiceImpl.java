@@ -3,6 +3,7 @@ package com.example.BaytAlAmana.serviceimpl;
 import com.example.BaytAlAmana.dto.InvestmentUpdateDto;
 import com.example.BaytAlAmana.entity.InvestmentEntity;
 import com.example.BaytAlAmana.entity.InvestmentUpdateEntity;
+import com.example.BaytAlAmana.mapper.InvestmentMapper;
 import com.example.BaytAlAmana.mapper.InvestmentUpdateMapper;
 import com.example.BaytAlAmana.repo.InvestmentRepository;
 import com.example.BaytAlAmana.repo.InvestmentUpdateRepository;
@@ -40,11 +41,12 @@ public class InvestmentUpdateServiceImpl implements InvestmentUpdateService {
 
         updateEntity.setInvestmentEntity(investment);
 
-        // Step 3: Save the update entity directly using InvestmentUpdateRepository
         InvestmentUpdateEntity savedUpdate = investmentUpdateRepository.save(updateEntity);
 
-        // Step 4: Return the saved entity as a DTO
-        return InvestmentUpdateMapper.INSTANCE.toInvestmentUpdateDto(savedUpdate);
+        InvestmentUpdateDto update = InvestmentUpdateMapper.INSTANCE.toInvestmentUpdateDto(savedUpdate);
+        update.setInvestmentId(investmentUpdateDto.getInvestmentId());
+
+        return update;
     }
 
 
@@ -64,6 +66,7 @@ public class InvestmentUpdateServiceImpl implements InvestmentUpdateService {
         updatedUpdateEntity.setInvestmentEntity(investment);
 
         InvestmentUpdateEntity savedUpdate = investmentUpdateRepository.save(updatedUpdateEntity);
+
 
         return InvestmentUpdateMapper.INSTANCE.toInvestmentUpdateDto(savedUpdate);
     }

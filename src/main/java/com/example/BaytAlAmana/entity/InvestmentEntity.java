@@ -1,7 +1,6 @@
 package com.example.BaytAlAmana.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +10,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @Entity
 @Table(name = "investment")
 @Data
@@ -26,14 +28,14 @@ public class InvestmentEntity {
     private String name;
 
     @Column(name = "status")
-    private String status;
+    private int status;
 
     @Column(name = "location")
     private String location;
 
     @Column(name = "funding")
     @Nullable
-    private Integer funding;
+    private int funding;
 
     @Column(name = "funding_goal")
     private int fundingGoal;
@@ -46,10 +48,10 @@ public class InvestmentEntity {
 
     @Column(name = "investor_count")
     @Nullable
-    private Integer investorCount;
+    private int investorCount;
 
     @OneToMany(mappedBy = "investmentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // Indicates this is the "parent" side for serialization
+     // Indicates this is the "parent" side for serialization
     private List<InvestmentUpdateEntity> updates = new ArrayList<>();
 
     @ManyToMany
@@ -60,6 +62,5 @@ public class InvestmentEntity {
     )
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JsonManagedReference
     private Set<UserEntity> users = new HashSet<>();
 }

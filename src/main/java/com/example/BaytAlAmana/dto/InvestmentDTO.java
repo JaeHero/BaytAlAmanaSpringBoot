@@ -24,7 +24,7 @@ public class InvestmentDTO {
 
     private String name;
 
-    private String status;
+    private int status;
 
     private String location;
 

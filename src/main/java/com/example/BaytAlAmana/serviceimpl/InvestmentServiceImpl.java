@@ -21,7 +21,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
     @Override
-    public InvestmentDTO getInvestmentById(int id) {
+    public InvestmentDTO getInvestmentById(int       id) {
         return InvestmentMapper.INSTANCE.toInvestmentDTO(investmentRepository.findById(id).orElseThrow(()->new RuntimeException("Investment not found")));
     }
 

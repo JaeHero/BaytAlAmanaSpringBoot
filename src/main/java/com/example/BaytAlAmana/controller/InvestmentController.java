@@ -49,7 +49,17 @@ public class InvestmentController {
         return ResponseEntity.ok().body(investmentService.deleteInvestment(id));
     }
 
-
+    @GetMapping("user/{id}/investments")
+    public ResponseEntity<List<InvestmentDTO>> getUserInvestments(@PathVariable int id){
+        return ResponseEntity.ok().body(investmentService.getUserInvestments(id));
     }
+
+    @GetMapping("user/{id}/available-investments")
+    public ResponseEntity<List<InvestmentDTO>> getAvailableInvestments(@PathVariable int id){
+        return ResponseEntity.ok().body(investmentService.getAvailableInvestments(id));
+    }
+
+
+}
 
 

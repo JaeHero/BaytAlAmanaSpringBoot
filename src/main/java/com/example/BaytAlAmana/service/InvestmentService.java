@@ -10,5 +10,7 @@ public interface InvestmentService {
     InvestmentDTO createInvestment(InvestmentDTO investmentDTO);
     InvestmentDTO updateInvestment(int id, InvestmentDTO investmentDTO);
     boolean deleteInvestment(int id);
+    List<InvestmentDTO> getUserInvestments(int id);
+    List<InvestmentDTO> getAvailableInvestments(int id);
     
 }

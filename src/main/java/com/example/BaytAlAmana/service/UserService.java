@@ -1,5 +1,6 @@
 package com.example.BaytAlAmana.service;
 
+import com.example.BaytAlAmana.dto.InvestmentDTO;
 import com.example.BaytAlAmana.dto.UserDto;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +12,5 @@ public interface UserService {
     UserDto updateUser(int id, UserDto userDto);
     boolean deleteUser(int id);
     boolean assignUserToInvestment(int id, int investmentId);
+    public boolean removeUserFromInvestment(int id, int investmentId);
 }

@@ -1,5 +1,6 @@
 package com.example.BaytAlAmana.controller;
 
+import com.example.BaytAlAmana.dto.InvestmentDTO;
 import com.example.BaytAlAmana.dto.UserDto;
 import com.example.BaytAlAmana.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getAllUsers(){
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
+
     @GetMapping("user/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable int id){
         return ResponseEntity.ok().body(userService.getUserById(id));
@@ -36,8 +38,13 @@ public class UserController {
         return ResponseEntity.ok().body(userService.deleteUser(id));
     }
 
-    @PutMapping("user/{id}/investment/{investmentId}")
+    @PostMapping("user/{id}/investment/{investmentId}")
     public ResponseEntity<Boolean> assignUserToInvestment(@PathVariable int id, @PathVariable int investmentId){
         return ResponseEntity.ok().body(userService.assignUserToInvestment(id, investmentId));
+    }
+
+    @DeleteMapping("user/{id}/investment/{investmentId}")
+    public ResponseEntity<Boolean> removeUserFromInvestment(@PathVariable int id, @PathVariable int investmentId){
+        return ResponseEntity.ok().body(userService.removeUserFromInvestment(id, investmentId));
     }
 }

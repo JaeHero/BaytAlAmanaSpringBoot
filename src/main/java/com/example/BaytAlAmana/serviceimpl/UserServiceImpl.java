@@ -69,10 +69,26 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         return true;
-
-
     }
 
-
+    @Override
+    public boolean removeUserFromInvestment(int id, int investmentId){
+        UserEntity user = userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("User not found"));
+        InvestmentEntity investment = investmentRepository.findById(investmentId).orElseThrow(()-> new EntityNotFoundException("Investment not found"));
+        user.getInvestments().remove(investment);
+        investment.getUsers().remove(user);
+        user.setInvestmentCount(user.getInvestments().size());
+        try {
+            investmentRepository.save(investment);
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
 
 }
+
+
+
+

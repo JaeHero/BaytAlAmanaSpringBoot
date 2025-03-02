@@ -2,13 +2,18 @@ package com.example.BaytAlAmana.serviceimpl;
 
 import com.example.BaytAlAmana.dto.InvestmentDTO;
 import com.example.BaytAlAmana.entity.InvestmentEntity;
+import com.example.BaytAlAmana.entity.UserEntity;
 import com.example.BaytAlAmana.mapper.InvestmentMapper;
 import com.example.BaytAlAmana.repo.InvestmentRepository;
 import com.example.BaytAlAmana.service.InvestmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class InvestmentServiceImpl implements InvestmentService {
 
@@ -48,4 +53,38 @@ public class InvestmentServiceImpl implements InvestmentService {
         }
         return true;
     }
-}
+
+    @Override
+    public List<InvestmentDTO> getUserInvestments(int id) {
+//        List<InvestmentEntity> investments = investmentRepository.findAll();
+//        List<InvestmentEntity> userInvestments = new ArrayList<>();
+//        for(InvestmentEntity investment : investments){
+//            for(UserEntity user: investment.getUsers()){
+//                if(user.getId() == id){
+//                    userInvestments.add(investment);
+//                }
+//            }
+//        }
+//        return InvestmentMapper.INSTANCE.toInvestmentDTOList(userInvestments);
+        return InvestmentMapper.INSTANCE.toInvestmentDTOList(investmentRepository.findInvestmentsByUserId(id));
+    }
+    @Override
+    public List<InvestmentDTO> getAvailableInvestments(int id){
+            List<InvestmentDTO> userInvestments = getUserInvestments(id);
+            List<InvestmentDTO> allInvestments = getAllInvestments();
+            List<InvestmentDTO> remainingInvestments = new ArrayList<>();
+
+            Set<Integer> userInvestmentIds = userInvestments.stream()
+                    .map(InvestmentDTO::getId)
+                    .collect(Collectors.toSet());
+
+            for (InvestmentDTO investment : allInvestments) {
+                if (!userInvestmentIds.contains(investment.getId())) {
+                    remainingInvestments.add(investment);
+                }
+            }
+            return remainingInvestments;
+        }
+
+    }
+

@@ -67,7 +67,6 @@ public class InvestmentUpdateServiceImpl implements InvestmentUpdateService {
 
         InvestmentUpdateEntity savedUpdate = investmentUpdateRepository.save(updatedUpdateEntity);
 
-
         return InvestmentUpdateMapper.INSTANCE.toInvestmentUpdateDto(savedUpdate);
     }
 

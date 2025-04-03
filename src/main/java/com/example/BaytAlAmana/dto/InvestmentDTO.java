@@ -38,6 +38,12 @@ public class InvestmentDTO {
 
     private int investorCount;
 
+    private int expenditures;
+
+    private int duration;
+
+    private int profit;
+
     private List<InvestmentUpdateEntity> updates;
 
     private Set<UserEntity> users;

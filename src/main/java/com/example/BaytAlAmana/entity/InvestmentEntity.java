@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -49,6 +50,18 @@ public class InvestmentEntity {
     @Column(name = "investor_count")
     @Nullable
     private int investorCount;
+
+    @Column(name = "expenditures")
+    @Nullable
+    private int expenditures;
+
+    @Column(name = "duration")
+    @Nullable
+    private int duration;
+
+    @Column(name = "profit")
+    @Nullable
+    private int profit;
 
     @OneToMany(mappedBy = "investmentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
      // Indicates this is the "parent" side for serialization

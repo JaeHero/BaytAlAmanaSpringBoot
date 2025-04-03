@@ -31,5 +31,7 @@ public class UserDto {
     private boolean isApproved;
     private boolean isPublic;
     private Date creationDate;
+    private int totalInvestment;
+    private int investedAmount;
    // private Set<InvestmentEntity> investments;
 }

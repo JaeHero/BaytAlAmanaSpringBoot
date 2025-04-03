@@ -66,4 +66,10 @@ public class UserEntity {
 
     @Column(name = "creation_date")
     private Date creationDate;
+
+    @Column(name = "total_investment")
+    private int totalInvestment;
+
+    @Column(name = "invested_amount")
+    private int investedAmount;
 }

@@ -70,6 +70,4 @@ public class UserEntity {
     @Column(name = "total_investment")
     private int totalInvestment;
 
-    @Column(name = "invested_amount")
-    private int investedAmount;
 }

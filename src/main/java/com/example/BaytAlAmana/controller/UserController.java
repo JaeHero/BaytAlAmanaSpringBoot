@@ -29,8 +29,10 @@ public class UserController {
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
         return ResponseEntity.ok().body(userService.createUser(userDto));
     }
+
     @PutMapping("user/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable int id, @RequestBody UserDto userDto){
+        System.out.println(userDto);
         return ResponseEntity.ok().body(userService.updateUser(id, userDto));
     }
     @DeleteMapping("user/{id}")

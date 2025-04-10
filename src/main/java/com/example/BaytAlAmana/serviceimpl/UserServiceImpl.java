@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(int id) {
         try{
+            UserEntity user = userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found"));
+            for (InvestmentEntity investment : user.getInvestments()) {
+                investment.getUsers().remove(user);
+                investmentRepository.save(investment);
+            }
             userRepository.deleteById(id);
         }catch (Exception e){
             return false;
@@ -86,6 +91,8 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+
+
 
 }
 

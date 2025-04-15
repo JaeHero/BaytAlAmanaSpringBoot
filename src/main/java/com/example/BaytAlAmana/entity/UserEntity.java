@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -65,7 +65,7 @@ public class UserEntity {
     private int intendedInvestment;
 
     @Column(name = "creation_date")
-    private Date creationDate;
+    private LocalDate creationDate;
 
     @Column(name = "total_investment")
     private int totalInvestment;

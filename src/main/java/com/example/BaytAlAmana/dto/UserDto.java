@@ -8,9 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +29,7 @@ public class UserDto {
     private boolean isAdmin;
     private boolean isApproved;
     private boolean isPublic;
-    private Date creationDate;
+    private LocalDate creationDate;
     private int totalInvestment;
 //    private int investedAmount;
    // private Set<InvestmentEntity> investments;

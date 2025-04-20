@@ -1,7 +1,7 @@
 package com.example.BaytAlAmana.controller;
 
-import com.example.BaytAlAmana.dto.InvestmentDTO;
 import com.example.BaytAlAmana.dto.UserDto;
+import com.example.BaytAlAmana.repo.UserRepository;
 import com.example.BaytAlAmana.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

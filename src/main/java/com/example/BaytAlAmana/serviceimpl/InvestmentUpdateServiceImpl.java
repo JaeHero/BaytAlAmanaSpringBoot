@@ -3,7 +3,6 @@ package com.example.BaytAlAmana.serviceimpl;
 import com.example.BaytAlAmana.dto.InvestmentUpdateDto;
 import com.example.BaytAlAmana.entity.InvestmentEntity;
 import com.example.BaytAlAmana.entity.InvestmentUpdateEntity;
-import com.example.BaytAlAmana.mapper.InvestmentMapper;
 import com.example.BaytAlAmana.mapper.InvestmentUpdateMapper;
 import com.example.BaytAlAmana.repo.InvestmentRepository;
 import com.example.BaytAlAmana.repo.InvestmentUpdateRepository;

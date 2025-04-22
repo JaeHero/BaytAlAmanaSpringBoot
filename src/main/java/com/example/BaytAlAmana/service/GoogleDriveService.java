@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class GoogleDriveService {
@@ -60,18 +58,29 @@ public class GoogleDriveService {
         file.transferTo(convFile);
         return convFile;
     }
-    public List<String> listFiles() throws IOException {
+
+    public List<Map<String, String>> listFilesInFolder(String folderId) throws IOException {
         FileList result = driveService.files().list()
-                .setPageSize(10)
-                .setFields("files(id, name)")
+                .setQ(String.format("'%s' in parents and trashed = false", folderId))
+                .setPageSize(20)
+                .setFields("files(id, name, mimeType)")
                 .execute();
 
-        List<String> fileNames = new ArrayList<>();
+        List<Map<String, String>> files = new ArrayList<>();
+
         for (com.google.api.services.drive.model.File file : result.getFiles()) {
-            fileNames.add(file.getName() + " (ID: " + file.getId() + ")");
+            // Optionally skip folders
+            if ("application/vnd.google-apps.folder".equals(file.getMimeType())) continue;
+
+            Map<String, String> fileData = new HashMap<>();
+            fileData.put("name", file.getName());
+            fileData.put("id", file.getId());
+            fileData.put("url", "https://drive.google.com/uc?id=" + file.getId());
+            files.add(fileData);
         }
 
-        return fileNames;
+        return files;
     }
+
 
 }

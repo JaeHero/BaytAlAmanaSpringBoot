@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/files")
+@RequestMapping("/api/v1/baytalamana")
 @CrossOrigin(origins = "*")
 public class GoogleDriveController {
     @Autowired
@@ -20,7 +21,7 @@ public class GoogleDriveController {
     private String folderId;
 
 
-    @PostMapping("/upload")
+    @PostMapping("/image-upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             String fileUrl = driveService.uploadFileToFolder(file, folderId);
@@ -30,14 +31,14 @@ public class GoogleDriveController {
         }
     }
 
-    @GetMapping("/test-drive")
-    public ResponseEntity<?> testGoogleDriveConnection() {
+    @GetMapping("/images")
+    public ResponseEntity<?> listFiles() {
         try {
-            List<String> files = driveService.listFiles();
+            List<Map<String, String>> files = driveService.listFilesInFolder(folderId);
             return ResponseEntity.ok(files);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Google Drive connection failed: " + e.getMessage());
+                    .body("Failed to list files: " + e.getMessage());
         }
     }
 

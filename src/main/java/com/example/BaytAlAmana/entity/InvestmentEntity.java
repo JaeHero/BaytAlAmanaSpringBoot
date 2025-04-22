@@ -76,4 +76,7 @@ public class InvestmentEntity {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<UserEntity> users = new HashSet<>();
+
+    @OneToMany(mappedBy = "investmentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InvestmentImagesEntity> images = new ArrayList<>();
 }

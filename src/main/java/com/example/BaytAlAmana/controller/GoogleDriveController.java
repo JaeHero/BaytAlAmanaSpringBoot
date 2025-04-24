@@ -7,6 +7,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,15 +22,22 @@ public class GoogleDriveController {
     private String folderId;
 
 
-    @PostMapping("/image-upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload-images/{id}")
+    public ResponseEntity<List<String>> uploadMultipleFiles(@PathVariable int id, @RequestParam("files") MultipartFile[] files) {
+        List<String> urls = new ArrayList<>();
+
         try {
-            String fileUrl = driveService.uploadFileToFolder(file, folderId);
-            return ResponseEntity.ok(fileUrl);
+            for (MultipartFile file : files) {
+                String url = driveService.uploadFileToFolder(file, folderId, id);
+                urls.add(url);
+            }
+            return ResponseEntity.ok(urls);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Upload failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(List.of("Upload failed: " + e.getMessage()));
         }
     }
+
 
     @GetMapping("/images")
     public ResponseEntity<?> listFiles() {

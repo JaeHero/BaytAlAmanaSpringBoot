@@ -7,6 +7,7 @@ import com.example.BaytAlAmana.mapper.InvestmentImagesMapper;
 import com.example.BaytAlAmana.repo.InvestmentRepository;
 import com.example.BaytAlAmana.repo.InvestmentImagesRepository;
 import com.example.BaytAlAmana.service.InvestmentImagesService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,21 +32,24 @@ public class InvestmentImagesServiceImpl implements InvestmentImagesService {
     }
 
     @Override
-    public InvestmentImagesDTO createInvestmentImage(InvestmentImagesDTO investmentImagesDTO) {
-
-        InvestmentEntity investment = investmentRepository.findById(investmentImagesDTO.getInvestmentId())
+    @Transactional
+    public InvestmentImagesDTO createInvestmentImage(InvestmentImagesDTO dto) {
+        InvestmentEntity investment = investmentRepository.findById(dto.getInvestmentId())
                 .orElseThrow(() -> new RuntimeException("Investment not found"));
 
-        InvestmentImagesEntity imageEntity = InvestmentImagesMapper.INSTANCE.toInvestmentImages(investmentImagesDTO);
+        InvestmentImagesEntity image = InvestmentImagesMapper.INSTANCE
+                .toInvestmentImages(dto);
 
-        imageEntity.setInvestmentEntity(investment);
+        image.setInvestmentEntity(investment);
+        investment.getImages().add(image);
 
-        InvestmentImagesEntity savedImage = investmentImagesRepository.save(imageEntity);
+        investmentRepository.save(investment);
 
-        InvestmentImagesDTO image = InvestmentImagesMapper.INSTANCE.toInvestmentImagesDto(savedImage);
-        image.setInvestmentId(investmentImagesDTO.getInvestmentId());
-
-        return image;
+        InvestmentImagesEntity saved = image;
+        InvestmentImagesDTO out = InvestmentImagesMapper.INSTANCE
+                .toInvestmentImagesDto(saved);
+        out.setInvestmentId(dto.getInvestmentId());
+        return out;
     }
 
 

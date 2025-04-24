@@ -12,6 +12,7 @@
 <h2>Todo</h2>
 
 <ul>
-<li>Update investment-image with fileUrl from GoogleDriveController.</li>
+<li>Delete endpoint for DB and delete endpoint for google drive</li>
+<li></li>
 </ul>
 
